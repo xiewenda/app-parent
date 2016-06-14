@@ -1,0 +1,87 @@
+<?xml version="1.0"?>
+<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>cn.com.taiji</groupId>
+    <artifactId>app-parent</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+  </parent>
+  <groupId>cn.com.taiji</groupId>
+  <artifactId>app-web</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+  <packaging>war</packaging>
+
+  <dependencies>
+            <dependency>
+				<groupId>org.webjars</groupId>
+				<artifactId>jquery</artifactId>
+			</dependency>
+			<dependency>
+				<groupId>org.webjars</groupId>
+				<artifactId>jquery-ui</artifactId>
+			</dependency>
+			<dependency>
+				<groupId>org.webjars</groupId>
+				<artifactId>bootstrap</artifactId>
+			</dependency>
+			<dependency>
+				<groupId>org.webjars</groupId>
+				<artifactId>kendo</artifactId>
+			</dependency>
+			<dependency>
+				<groupId>org.webjars</groupId>
+				<artifactId>openlayers</artifactId>
+			</dependency>
+			<dependency>
+				<groupId>org.webjars</groupId>
+				<artifactId>jeasyui</artifactId>
+			</dependency>
+			<dependency>
+				<groupId>org.webjars</groupId>
+				<artifactId>jquery-form</artifactId>
+			</dependency>
+			
+		<dependency>
+				<groupId>org.apache.axis</groupId>
+	        	<artifactId>axis</artifactId>
+	        	<optional>true</optional>
+   		</dependency>
+		<dependency>
+	        <groupId>org.apache.axis</groupId>
+	        <artifactId>axis-jaxrpc</artifactId>
+	        <optional>true</optional>
+	    </dependency>
+
+		<!-- BJCA -->
+	    <dependency>
+				<groupId>bjca.single</groupId>
+				<artifactId>BJCA-JDOM</artifactId>
+				<optional>true</optional>
+		</dependency>
+	    <dependency>
+				<groupId>bjca.single</groupId>
+				<artifactId>bjcaticketsso_For_P12</artifactId>
+				<optional>true</optional>
+		</dependency>
+		<dependency>
+				<groupId>bjca.single</groupId>
+				<artifactId>SecEngineDeal</artifactId>
+				<optional>true</optional>
+		</dependency>
+		
+  		<dependency>
+        	<groupId>cn.com.taiji</groupId>
+    		<artifactId>app-core</artifactId>
+    	</dependency>
+
+	    <dependency>
+	      <groupId>junit</groupId>
+	      <artifactId>junit</artifactId>
+	      <scope>test</scope>
+	    </dependency>
+  </dependencies>
+  <build>
+    <finalName>app-web</finalName>
+  </build>
+</project>

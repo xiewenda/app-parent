@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 这是springboot 默认配置文件  -->
+<!-- xiewenda 20160531 把默认的spring-boot-starter-logging.jar去掉了 使用了spring-boot-starter-log4j  -->
+<!-- 如果想换回springboot默认的日志 请配置此文件 然后在 app的pom文件中去掉spring-boot-starter-log4j依赖  去掉spring-boot-starter下的<exclusion>spring-boot-starter-logging.jar -->
+<configuration>
+	<include resource="org/springframework/boot/logging/logback/base.xml" />
+	<logger name="cn.com.taiji" level="DEBUG" />
+</configuration>

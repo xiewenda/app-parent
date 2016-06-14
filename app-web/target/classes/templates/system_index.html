@@ -1,0 +1,269 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" >
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>办公平台首页</title>
+<meta http-equiv="Pragma" CONTENT="no-cache" />
+<meta http-equiv="Window-target" CONTENT="_top" />
+<!--样式文件调用注意不要改变顺序-->
+<link th:href="@{/zhuanjiaw_blue/css/base.css}" rel="stylesheet" type="text/css" />
+<link th:href="@{/zhuanjiaw_blue/css/main_style.css}" rel="stylesheet" type="text/css" />
+<link th:href="@{/zhuanjiaw_blue/css/index_style.css}" rel="stylesheet" type="text/css" />
+<link th:href="@{/zhuanjiaw_blue/css/main_style02.css}" rel="stylesheet" type="text/css" />
+<!--/*[if lt IE 7]><link href="../zhuanjiaw_blue/css/ie7hack.css" rel="stylesheet" type="text/css" media="screen"/><![endif]*/-->
+</head>
+<body>
+<div class="wrap_w">
+	<div class="fn-clear">
+    	<!-- 待办提醒 -->
+    	<div class="fn-left" style="width:500px;">
+        	<div style="text-align:right;" ><img th:src="@{/zhuanjiaw_blue/images/index/gray_sj.png}"/></div>
+            <div class="b_lbr bt_blu bg_wh" style="height:236px; *height:240px;">
+            	<div class="fn-clear">
+                	<p class="fn-left" style="margin:2px 0 0 -7px;"><img th:src="@{/zhuanjiaw_blue/images/index/tit_dbtx.png}" /></p>
+                    <p class="fn-right mR10"><a th:href="@{/NoFinishProjectReview}" title="刷新"><img th:src="@{/zhuanjiaw_blue/images/index/icon_refresh.png}"/></a></p>
+                </div>
+                <div class="list" style="height:180px;overflow:auto">
+                	<ul class="list_1" >
+                		<!-- 专家修改信息 -->
+                		<li class="fn-clear" th:each="MeetingWaitingDto: ${zjxgxx}">
+                        	<h1 class="bluball fn-left"><span th:text="${MeetingWaitingDto.meetingname}"></span></h1>
+                            <div class="liR fn-right">
+                            	<span th:text=" ${MeetingWaitingDto.meetingtime} != null ? '['+${#strings.substring(MeetingWaitingDto.meetingtime,0,10)}+']' :'' "></span>
+                                <p th:text="${MeetingWaitingDto.meetingadd}">专家委秘书处</p>
+                            </div>
+                        </li>
+                		<!-- 节日 -->
+                		<li class="fn-clear" th:each="MeetingWaitingDto: ${jrList}">
+                        	<h1 class="bluball fn-left"><span th:text="${MeetingWaitingDto.meetingname}"></span></h1>
+                            <div class="liR fn-right">
+                            	<span th:text=" ${MeetingWaitingDto.meetingtime} != null ? '['+${#strings.substring(MeetingWaitingDto.meetingtime,0,10)}+']' :'' "></span>
+                                <p th:text="${MeetingWaitingDto.meetingadd}">专家委秘书处</p>
+                            </div>
+                        </li>
+                        <!-- 专家生日 -->
+                		<li class="fn-clear" th:each="MeetingWaitingDto: ${zjsrList}">
+                        	<h1 class="bluball fn-left"><span th:text="${MeetingWaitingDto.meetingname}"></span></h1>
+                            <div class="liR fn-right">
+                            	<span th:text=" ${MeetingWaitingDto.meetingtime} != null ? '['+${#strings.substring(MeetingWaitingDto.meetingtime,0,10)}+']' :'' "></span>
+                                <p th:text="${MeetingWaitingDto.meetingadd}">专家委秘书处</p>
+                            </div>
+                        </li>
+                    	<li class="fn-clear" th:each="MeetingWaitingDto: ${meetingWaitingList}">
+                        	<h1 class="bluball fn-left"><span th:text="${MeetingWaitingDto.meetingname}"></span></h1>
+                            <div class="liR fn-right">
+                            	<span th:text=" ${MeetingWaitingDto.meetingtime} != null ? '['+${#strings.substring(MeetingWaitingDto.meetingtime,0,10)}+']' :'' "></span>
+                                <p th:text="${MeetingWaitingDto.meetingadd}">专家委秘书处</p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <!-- End 待办提醒 -->
+        <!-- 评审 -->
+        <div class="fn-right b_lbr bg_wh" style="width:498px; height:249px; *height:253px;" th:inline="text">
+        	<div>
+            	<ul class="fn-clear">
+               		<li class="psCard_on"  onClick="showCard(this,'cardCont','psCard')">评审<p class="ps_hint">[[${projectReviewCount}]]</p></li>
+                    <li class="psCard_off" onClick="showCard(this,'cardCont','psCard')">咨询<p class="ps_hint" th:text="${#arrays.length(professionalconsultList)}">10</p></li>
+                    <li class="psCard_off" onClick="showCard(this,'cardCont','psCard')">课题<p class="ps_hint" th:text="${#arrays.length(KTlist)}">5</p></li>
+                    <li class="psCard_off" onClick="showCard(this,'cardCont','psCard')">调研<p class="ps_hint" th:text="${#arrays.length(DYlist)}">5</p></li>
+                    <li class="psCard_off" onClick="showCard(this,'cardCont','psCard')">会议<p class="ps_hint" th:text="${#arrays.length(meetingList)}"></p></li>
+                </ul>
+            </div>
+            <!-- 评审 -->
+            <div id="cardCont0" style="display:block;">
+            	<div class="list">
+                	<ul class="list_1" >
+                    	<li class="fn-clear" th:each="ProjectProfessionalDto,iterStat: ${projectReviewList}" th:if="4 > ${iterStat.count}">
+                        	<h1 class="bluball fn-left"><a th:href="@{/projectReview/xmbl(ProjectreviewID= ${ProjectProfessionalDto.id})}">[[${ProjectProfessionalDto.projectTitle}]]</a></h1>
+                            <div class="liR fn-right">
+                            	<span th:text=" ${ProjectProfessionalDto.createTime} != null ? '['+${#dates.format(ProjectProfessionalDto.createTime, 'MM-dd')}+']' :'' "></span>
+                                <p th:text="${ProjectProfessionalDto.projectOrgan}">专家委秘书处</p>
+                            </div>
+                        </li>
+                    </ul>
+                    <a th:href="@{projectReview/index}" class="more_1 fn-right">查看更多&gt;&gt;</a>
+                </div>
+            </div>
+            <!-- 咨询 -->
+            <div id="cardCont1" style="display:none;">
+            <div class="list">
+                	<ul class="list_1" >
+                    	<li class="fn-clear" th:each="professionalconsultDto,iterStat:${professionalconsultList}" th:if="4 > ${iterStat.count}">
+                        	<h1 class="bluball fn-left"><a th:href="@{/zixun/zixun_banli(consultid=${professionalconsultDto.id})}">[[${professionalconsultDto.title}]]</a></h1>
+                            <div class="liR fn-right">
+                            	<span th:text=" ${professionalconsultDto.createtime} != null ? '['+${#strings.substring(professionalconsultDto.createtime,5,10)}+']' :'' "></span>
+                                <p th:text="${professionalconsultDto.conOrgan}">专家委秘书处</p>
+                            </div>
+                        </li>
+                    </ul>
+                    <a th:href="@{/zixun/zixun_index}" class="more_1 fn-right">查看更多&gt;&gt;</a>
+                </div>
+            </div>
+            <!-- 课题 -->
+            <div id="cardCont2" style="display:none;">
+            <div class="list">
+                	<ul class="list_1" >
+                    	<li class="fn-clear" th:each="subject,iterStat: ${KTlist}" th:if="6 > ${iterStat.count}">
+                        	<h1 class="bluball fn-left"><a th:href="@{/subjectMeeting/toEdit(id = ${subject.id})}">[[${subject.title}]]</a></h1>
+                            <div class="liR fn-right">
+                            	<span th:text="${subject.resTime} != null ? '['+${#strings.substring(subject.resTime,5,10)}+']' :'' "></span>
+                                <p th:text="${subject.resOrgan}">专家委秘书处</p>
+                            </div>
+                        </li>
+                    </ul>
+                    <a th:href="@{/ktyj/index}" class="more_1 fn-right">查看更多&gt;&gt;</a>
+                </div>
+            </div>
+            <!-- 调研 -->
+            <div id="cardCont3" style="display:none;">
+              <div class="list">
+               	<ul class="list_1" >
+                   	<li class="fn-clear" th:each="project,iterStat: ${DYlist}" th:if="6 > ${iterStat.count}">
+                       	<h1 class="bluball fn-left"><a th:href="@{/subjectMeeting/toEdit(id = ${project.id})}">[[${project.title}]]</a></h1>
+                        <div class="liR fn-right">
+                        	<span th:text=" ${project.resTime} != null ? '['+${#strings.substring(project.resTime ,5,10)}+']' :'' "></span>
+                            <p th:text="${project.resOrgan}">专家委秘书处</p>
+                        </div>
+                    </li>
+                 </ul>
+                 <a th:href="@{/subjectMeeting/index}" class="more_1 fn-right">查看更多&gt;&gt;</a>
+              </div>
+            </div>
+            <!-- 会议 -->
+            <div id="cardCont4" style="display:none;">
+            	<div class="list">
+                	<ul class="list_1" >
+                    	<li class="fn-clear" th:each="meeting,iterStat: ${meetingList}" th:if="5 > ${iterStat.count}">
+                        	<h1 class="bluball fn-left"><a th:href="@{/main_page/check(meetingId=${meeting.Id})}" >[[${meeting.meetingTitle}]]</a></h1>
+                            <div class="liR fn-right">
+                            	<span th:text=" ${meeting.meetingTime} != null ? '['+${#strings.substring(meeting.meetingTime ,5,10)}+']' :'' "></span>
+                            </div>
+                        </li>
+                    </ul>
+                    <a th:href="@{/main_page/hyhd_index}" class="more_1 fn-right">查看更多&gt;&gt;</a>
+                </div>
+            </div>
+        </div>
+        <!-- End 评审 -->
+    </div>
+    <div style="height:20px;"></div>
+    <div class="fn-clear">
+    	<!-- 辅助办公 -->
+    	<div class="fn-left">
+        	<img th:src="@{/zhuanjiaw_blue/images/index/fzbg.png}" width="117" height="380" usemap="#Map" border="0" />
+            <map name="Map" id="Map">
+<!--               <area shape="rect" coords="11,42,106,137"  th:href="@{http://172.24.120.26:7001/GovSSOService/SSOSecService(sid=7ac39c275b1e7f3b744eb4e5e4257c61,LinkType=online,LinkID=mhtxl)}" target="_blank" /> -->
+<!--               <area shape="rect" coords="11,154,106,249" href="http://172.24.120.13/coboportal/portal/gwyindex.page" target="_blank" /> -->
+<!--               <area shape="rect" coords="12,264,105,359" th:href="@{http://172.24.120.26:7001/GovSSOService/SSOSecService(sid=7ac39c275b1e7f3b744eb4e5e4257c61,LinkType=online,LinkID=fax)}" target="_blank" /> -->
+<!-- 	            <area shape="rect" coords="11,42,106,137"  th:href="@{http://172.24.120.26:7001/GovSSOService/SSOSecService(sid=${userID},LinkType=online,LinkID=mhtxl)}" target="_blank" /> -->
+ <area shape="rect" coords="11,42,106,137" th:href="'javascript:tongxunlu(\'' + ${userID} + '\');'" />
+				
+				<area shape="rect" coords="11,154,106,249" href="http://172.26.48.178/coboportal/portal/gwyindex.page" target="_blank" />
+				<area shape="rect" coords="12,264,105,359" th:href="@{http://172.24.120.26:7001/GovSSOService/SSOSecService(sid=${userID},LinkType=online,LinkID=OAO3)}" target="_blank" />
+            </map>
+        </div>
+        <!-- End 辅助办公 -->
+        <!-- 工作动态 -->
+        <div class="fn-left">
+            <iframe src="http://172.24.49.97/bgpt/gzdt/gzdt.html" name="subframe" width="385" height="380" marginwidth="0" marginheight="0" scrolling="no" frameborder="0" id="subframe"></iframe>
+        </div>
+        <!-- End 工作动态 -->
+        <!-- 资料共享 -->
+         <div class="bg_wh b_a fn-right" style="width:480px; height:378px;">
+            <div class="fn-clear">
+                <span class="fn-left"><a th:href="@{/expertsShare-list}" title="审核"><img src="http://172.24.49.97/bgpt/images/index/zlgx_tit.png" /></a></span>
+                <div class="dtTit fn-left">
+                    <ul>
+                        <li class="dtCard_on" onClick="showCard(this,'dtCont','dtCard')">秘书处共享</li>
+                        <li class="dtCard_off" onClick="showCard(this,'dtCont','dtCard')">专家共享</li>
+                    </ul>
+                </div>
+            </div>
+            <div id="dtCont0" style="display:block;">
+	            <iframe src="http://172.24.49.97/bgpt/mscgx/zlgx.html" name="subframe" width="480" height="380" marginwidth="0" marginheight="0" scrolling="no" frameborder="0" id="subframe"></iframe>
+	        </div>
+            <div id="dtCont1" style="display:none;">
+	            <div class="list">
+	                <ul class="list_2" style="height:272px;">
+	                    <li th:if="6>${iterStat.count}" th:each="expertsShare,iterStat : ${expertsShares}">
+		                    <a th:attr="href='javascript:editExpertsShare(\''+${expertsShare.eId}+'\');'"  th:text="${expertsShare.title}" ></a> 
+		                    <span th:text="'('+${expertsShare.fbweb}+')'"/>
+	                    </li>                    
+	                </ul>
+	                <a th:href="@{/expertsShare-list}" class="more_1 fn-right">查看更多&gt;&gt;</a>
+	            </div>
+            </div>
+	       
+        </div>
+        <!-- End 资料共享 -->
+    </div>
+    <div style="height:20px;"></div>
+    <!-- 图片新闻 -->
+    <iframe src="http://172.24.49.97/bgpt/tpxw/tpxw.html" name="subframe" width="1000" height="201" marginwidth="0" marginheight="0" scrolling="no" frameborder="0" id="subframe"></iframe>
+    <!-- End 图片新闻 -->
+    <div style="height:20px;"></div>    
+    <!-- 评审专栏 & 课题专栏 -->
+<!--     <iframe src="http://172.24.49.97/bgpt/pszl/ps-kt.html" name="subframe" width="1000" height="268" marginwidth="0" marginheight="0" scrolling="no" frameborder="0" id="subframe"></iframe> -->
+     <iframe src="http://172.24.49.97/bgpt/ps-kt.html" name="subframe" width="1000" height="268" marginwidth="0" marginheight="0" scrolling="no" frameborder="0" id="subframe"></iframe>
+    <!-- End 评审专栏 & 课题专栏 -->
+    <div style="height:20px;"></div>
+    <!-- 热点信息 & 专家视角 -->
+    <iframe src="http://172.24.49.97/bgpt/rd-zj.html" name="subframe" width="1000" height="268" marginwidth="0" marginheight="0" scrolling="no" frameborder="0" id="subframe"></iframe>
+    <!-- End 热点信息 & 专家视角 -->
+    <div style="height:20px;"></div>
+    <!-- 订制信息 & 专家推荐 & 沟通交流 -->
+    <div class="fn-clear">
+    	<!-- 专家委推荐订制 -->
+        <div style="width:333px;" class="fn-left">
+        	<iframe src="http://172.24.49.97/bgpt/zjwtjdzxx/zjw_dzxx.html" name="subframe" width="100%" height="244" marginwidth="0" marginheight="0" scrolling="no" frameborder="0" id="subframe"></iframe>
+        </div>
+        <!-- End 专家委推荐订制 -->
+        <!-- 专家推荐 & 新技术推荐 -->
+        <div class="bg_wh b_lbr bt_blu mL10 fn-left" style="width:340px; height:240px;">
+            <div class="dtTit">
+                <ul class="fn-clear">
+                    <li class="dtCard_on" onClick="showCard(this,'dtContt','dtCard')">专家推荐</li>
+                    <li class="dtCard_off" onClick="showCard(this,'dtContt','dtCard')">新技术推荐</li>                </ul>            </div>            <div id="dtContt0" style="display:block;">            <div class="list" style="text-overflow:ellipsis;white-space:nowrap;overflow:hidden;" >                <ul class="list_2" style="height:135px;">
+	                <li th:if="4>${iterStat.count}" th:each="epCoverList,iterStat: ${epCoverList}">
+	                	<a  th:attr="href='javascript:editExpertsCover(\''+${epCoverList.eId}+'\',\''+expert+'\');'" th:text="${epCoverList.orgname}+'-'+${epCoverList.property2}">北京市信息化咨询专家委员会举行...</a>
+	                	<span th:text="'('+${epCoverList.sharetype}+')'"/>
+	                </li>                </ul>                <a th:href="@{/expertsCover-list}" class="more_1 fn-right">查看更多&gt;&gt;</a>            </div>            </div>            <div id="dtContt1" style="display:none;">
+	            <div class="list" style="text-overflow:ellipsis;white-space:nowrap;overflow:hidden;" >
+	                <ul class="list_2">
+		                <li th:if="4>${iterStat.count}" th:each="otherCoverList,iterStat: ${otherCoverList}">
+		                	<a  th:attr="href='javascript:editExpertsCover(\''+${otherCoverList.eId}+'\',\''+other+'\');'" th:text="${otherCoverList.orgname}+'-'+${otherCoverList.content}">北京市信息化咨询专家委员会举行...</a>
+		                	<span th:text="'('+${otherCoverList.sharetype}+')'"/>
+		                </li>
+	                </ul>
+	                <a th:href="@{/expertsCover-list-1}" class="more_1 fn-right">查看更多&gt;&gt;</a>
+	            </div>            </div>        </div>        <!-- End 专家推荐 & 新技术推荐 -->        <!-- 沟通交流 -->      <div class="bg_wh b_lbr bt_blu fn-right" style="width:303px; height:240px;">        	<div><img th:src="@{/zhuanjiaw_blue/images/index/tit_gtj.png}" usemap="#Map2" border="0" />              <map name="Map2" id="Map2">                <area shape="rect" coords="226,8,297,43" th:href="@{/expertsCommunicate-list}" />              </map>       	  </div>            <div class="list">                <ul class="list_2" th:each="ecList,iterStat: ${ecList}">                    <li th:if="5>${iterStat.count}"><a th:attr="href='javascript:editExpertsCommunicate(\''+${ecList.eId}+'\');'" th:text="${ecList.content}">北京市信息化咨询专家委员会...</a></li>                </ul>            </div>        </div>        <!-- End 沟通交流 -->    </div>    <!-- End 订制信息 & 专家推荐 & 沟通交流 --></div><!-- Footer --><!-- <div class="footer"> --><!-- 	<p>本网站所刊登的各种新闻、信息和各种专题资料，未经协议授权，禁止下载使用</p> --><!-- 	<p>版权所有：北京市信息化专家咨询委员会  联系电话：（010）88011372</p> --><!-- </div> --><!-- End Footer --><!--                       Javascripts 注意不要改变顺序                      --><script type="text/javascript" th:src="@{/zhuanjiaw_blue/js/jquery-1.8.2.min.js}"></script><!-- 组件template --><script type="text/javascript" th:src="@{/zhuanjiaw_blue/js/tpl.base.js}"></script><script type="text/javascript" th:src="@{/zhuanjiaw_blue/js/trans.table.js}"></script>	
+<script type="text/javascript" th:src="@{/zhuanjiaw_blue/js/public.js}"></script>
+<script th:inline="javascript">
+/*<![CDATA[*/
+function tongxunlu(uid){
+	window.open("http://172.24.120.26:7001/GovSSOService/SSOSecService?sid="+uid+"&LinkType=online&LinkID=jxwmh_test&ExtParam=action%3dshortmessagetoxd%26funcid%3dgoUserMsg%26sid%3d"+uid,"_blank");
+	
+}
+function editExpertsShare(id)
+{
+	var url = "expertsShare-edit?id="+id;
+	window.open(url);
+}
+function editExpertsCover(id,flag)
+{
+	var url = "expertsCover-edit?id="+id+"&flag="+flag;
+	window.open(url);
+}
+function editExpertsCommunicate(id)
+{
+	var url = "expertsCommunicate-edit?id="+id;
+	window.open(url);
+}
+
+/*]]>*/
+</script>
+</body>
+</html>

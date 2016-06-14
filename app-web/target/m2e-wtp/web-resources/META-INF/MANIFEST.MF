@@ -1,0 +1,10 @@
+Manifest-Version: 1.0
+Implementation-Title: app-web
+Implementation-Version: 0.0.1-SNAPSHOT
+Built-By: Administrator
+Implementation-Vendor-Id: cn.com.taiji
+Build-Jdk: 1.8.0_20
+Created-By: Maven Integration for Eclipse
+Implementation-Vendor: Pivotal Software, Inc.
+Main-Class: cn.com.taiji.Application
+
